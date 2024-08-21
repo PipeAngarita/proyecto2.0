@@ -13,11 +13,11 @@
   </style>
 </head>
 <body>
-    <h1>Bienvenido, <?php 
+    <!-- <h1>Bienvenido, <?php 
 
     echo htmlspecialchars($_SESSION['nombre']); 
     
-    ?></h1>
+    ?></h1> -->
   <section>
     <div class="registro container mt-5 p-4 rounded">
       <h1>Registro de Datos</h1>
@@ -78,14 +78,18 @@
           </tr>
         </thead>
         <tbody>
-          <?php foreach($_SESSION['mascotas'] as $mascota) { ?>
+          <?php 
+          if(isset($_SESSION['mascotas'])) {
+                
+          foreach($_SESSION['mascotas'] as $mascota) { ?>
             <tr>
               <td><?php echo $mascota['nombre_mascota']; ?></td>
               <td><?php echo $mascota['raza']; ?></td>
               <td><?php echo $mascota['peso']; ?></td>
               <td><?php echo $mascota['estatura']; ?></td>
             </tr>
-          <?php } ?>
+          <?php }
+          } ?>
         </tbody>
       </table>
     </div>

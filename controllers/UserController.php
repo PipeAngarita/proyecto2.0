@@ -18,10 +18,14 @@ class UserController {
             $user = $this->getUserById($userId);
             $pet = $this->getPetByUserId($userId);
 
-            // Diagnóstico: Verificar los datos recuperados
-            $_SESSION['nombre'] = $user['nombre'];
-            $_SESSION['telefono']= $user['telefono'];
-            $_SESSION['mascotas']= $pet;
+            if($user)   {
+                                // Diagnóstico: Verificar los datos recuperados
+                $_SESSION['nombre'] = isset($user['nombre']) ? $user['nombre'] : '';
+                $_SESSION['telefono']= isset($user['telefono']) ? $user['telefono'] : '';
+                $_SESSION['mascotas']= isset($pet) ? $pet : '';
+            }
+
+
             // echo '<pre>';
             // echo 'User Data: ';
             // var_dump($user);
@@ -74,7 +78,7 @@ class UserController {
                 $stmtMascota->execute();
                 $stmtMascota->close();
 
-                echo "Datos actualizados correctamente en las tablas usuario y mascota.";
+                echo "<script>alert('Datos guardados con exito.');</script>";
 
                 include 'views/bienvenida.php';
             } else {
@@ -90,7 +94,7 @@ class UserController {
                 $stmtMascota->execute();
                 $stmtMascota->close();
 
-                echo "Datos insertados correctamente en las tablas usuario y mascota.";
+                echo "<script>alert('Datos guardados con exito.');</script>";
 
                 include 'views/bienvenida.php';
             }
